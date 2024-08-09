@@ -17,9 +17,21 @@ module.exports = {
       screens: {
         "2xl": "1400px",
       },
+      
+    },
+    fontFamily: {
+      'sf-pro': ['SF Pro', 'sans-serif'],
+      'inter': ["Inter", 'sans-serif'],
     },
     extend: {
+      borderWidth: {
+        'default': '0.65px',
+      },
       colors: {
+        smgray:"#F6F6F7",
+        bggray:"rgba(239, 237, 234, 1)",
+        smtext:'rgba(95, 95, 97, 1)',
+        brgray: 'rgba(0, 0, 0, 0.1)',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
