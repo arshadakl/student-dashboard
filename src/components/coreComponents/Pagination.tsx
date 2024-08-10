@@ -29,7 +29,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
   }
 
   return (
-    <Pagination className="flex justify-start">
+    <Pagination className="flex lg:justify-start justify-center  ">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious

@@ -78,7 +78,7 @@ export const MobileNavBar = () => {
   return (
     <>
       <div
-        className={`lg:static   w-full h-20 lg:hidden absolute bottom-0 z-10  bg-white border-t-default border-brgray`}
+        className="lg:static w-full h-20 lg:hidden fixed bottom-0 z-10  bg-white border-t-default border-brgray"
       >
         <>
           <div className="flex items-center font-sf-pro h-full ">

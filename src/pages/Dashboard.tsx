@@ -8,7 +8,6 @@ import Classes from "../components/coreComponents/Classes";
 import DashboardLayout from "../components/coreComponents/DashboardLayout";
 import PaginationComponent from "../components/coreComponents/Pagination";
 import Assignments from "../components/coreComponents/Assignments";
-import { MobileNavBar } from "../components/coreComponents/SideBar";
 
 function Dashboard() {
   const [classesData, setClassesData] =
@@ -66,7 +65,7 @@ function Dashboard() {
 
   return (
     <div>
-       <MobileNavBar/>
+       
       <DashboardLayout>
         <div className="flex flex-col md:flex-row w-full gap-3">
           <Classes
@@ -77,7 +76,7 @@ function Dashboard() {
           />
           <Assignments />
         </div>
-        <div className="flex font-inter lg:w-1/2 w-full justify-between my-2">
+        <div className="flex lg:flex-row flex-col gap-1 font-inter lg:w-1/2 w-full justify-between my-2 pb-20  ">
           <PaginationComponent
             itemsPerPage={itemsPerPage}
             totalItems={filteredClasses.length}
@@ -85,7 +84,7 @@ function Dashboard() {
             currentPage={currentPage}
           />
 
-          <div className="flex items-center justify-end gap-6  w-full ">
+          <div className="flex items-center lg:justify-end justify-center gap-6  w-full ">
             <label htmlFor="results" className="text-sm font-medium">
               Result per page
             </label>

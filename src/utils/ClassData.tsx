@@ -30,7 +30,7 @@ export interface ClassesData {
       staffImage: "avatar.jpg",
       isLive: false,
       timeLeft: moment.duration(2, "hours").add(40, "minutes"),
-      isBooked: true,
+      isBooked: false,
       date: moment().add(1, "day").set({ hour: 18, minute: 0 }),
     },
     {

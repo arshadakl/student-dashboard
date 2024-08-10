@@ -1,7 +1,7 @@
 
 
 import React, { useState } from "react";
-import SideBar from "./SideBar";
+import SideBar, { MobileNavBar } from "./SideBar";
 import { FiBell } from "react-icons/fi";
 
 
@@ -26,7 +26,7 @@ const DashboardLayout: React.FC<DashboardProps> = ({children }) => {
       )}
 
       <SideBar sidebarOpen={sidebarOpen}/>
-      
+      <MobileNavBar/>
       
       {/* menue items */}
       <div className="flex flex-col flex-1 overflow-hidden  bg-white">
@@ -46,8 +46,8 @@ const DashboardLayout: React.FC<DashboardProps> = ({children }) => {
           <FiBell className="lg:hidden" size={21} />
           </div>
         </div>
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-smgray">
-          <div className="lg:container lg:p-2 mx-auto">
+        <main className="flex-1  bg-smgray overflow-x-hidden overflow-y-auto">
+          <div className="lg:container lg:p-2 mx-auto ">
             {children}
           </div>
         </main>
