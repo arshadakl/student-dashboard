@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const flowbite = require("flowbite-react/tailwind");
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -17,7 +18,6 @@ module.exports = {
       screens: {
         "2xl": "1400px",
       },
-      
     },
     fontFamily: {
       'sf-pro': ['SF Pro', 'sans-serif'],
@@ -28,12 +28,12 @@ module.exports = {
         'default': '0.65px',
       },
       colors: {
-        smgray:"#F6F6F7",
-        bggray:"rgba(239, 237, 234, 1)",
-        smtext:'rgba(95, 95, 97, 1)',
+        smgray: "#F6F6F7",
+        primeblue: "#2080F6",
+        bggray: "rgba(239, 237, 234, 1)",
+        smtext: 'rgba(95, 95, 97, 1)',
         brgray: 'rgba(0, 0, 0, 0.1)',
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
+        input: "hsl(var(--input))", // Fixed this part
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -87,5 +87,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),flowbite.plugin()],
-}
+  plugins: [require("tailwindcss-animate"), flowbite.plugin()],
+};
