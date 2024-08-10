@@ -76,7 +76,7 @@ function Dashboard() {
           />
           <Assignments />
         </div>
-        <div className="flex lg:flex-row flex-col gap-1 font-inter lg:w-1/2 w-full justify-between my-2 pb-20  ">
+        <div className="flex lg:flex-row flex-col gap-1 font-inter lg:w-1/2 w-full justify-between my-2 pb-20 lg:pb-0  ">
           <PaginationComponent
             itemsPerPage={itemsPerPage}
             totalItems={filteredClasses.length}
