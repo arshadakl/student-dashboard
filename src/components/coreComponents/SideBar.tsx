@@ -71,11 +71,14 @@ function SideBar({ sidebarOpen }: { sidebarOpen: boolean }) {
   );
 }
 
+
+
+// mobile view nav items
 export const MobileNavBar = () => {
   return (
     <>
       <div
-        className={`ease-out duration-300 lg:static lg:inset-0 inset-x-0 w-full h-20 lg:hidden absolute bottom-0 z-10 bg-white border-t-default border-brgray`}
+        className={`lg:static   w-full h-20 lg:hidden absolute bottom-0 z-10  bg-white border-t-default border-brgray`}
       >
         <>
           <div className="flex items-center font-sf-pro h-full ">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+
 import moment from "moment";
 import {
   Card,
@@ -34,79 +34,21 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
-import { ClassesData, initialClassesData } from "../../utils/ClassData";
-import { toast } from "sonner";
+import { ClassesData } from "../../utils/ClassData";
+import { formatClassDate, formatTimeLeft } from "../../utils/Services";
 
-function Classes() {
-  const [classesData, setClassesData] = useState<ClassesData[]>(initialClassesData);
-  const [bookedOnly, setBookedOnly] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
+
+//class interface
+interface ClassesProps {
+  currentItems: ClassesData[];
+  handileBooking: (id: number, date: moment.Moment) => void;
+  bookedOnly: boolean;
+  setBookedOnly: (value: boolean) => void;
+}
+
+function Classes({ currentItems, handileBooking, bookedOnly, setBookedOnly }: ClassesProps) {
   const size = useWindowSize();
-
-  useEffect(() => {
-    setItemsPerPage(5)
-    const timer = setInterval(() => {
-      setClassesData((prevData) =>
-        prevData.map((classItem) => {
-          if (classItem.isLive) {
-            const newTimeLeft = moment
-              .duration(classItem.timeLeft)
-              .subtract(1, "second");
-            return { ...classItem, timeLeft: newTimeLeft };
-          }
-          return classItem;
-        })
-      );
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const filteredClasses = bookedOnly
-    ? classesData.filter((c) => c.isBooked)
-    : classesData;
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredClasses.slice(indexOfFirstItem, indexOfLastItem);
-
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-  const formatTimeLeft = (duration: moment.Duration): string => {
-    if (duration.asSeconds() <= 0) return "00:00";
-    return moment.utc(duration.asMilliseconds()).format("mm:ss");
-  };
-
-  const formatClassDate = (date: moment.Moment): string => {
-    const now = moment();
-    const isToday = now.isSame(date, "day");
-
-    const formattedDate = isToday
-      ? `Today ${date.format("h:mmA")}`
-      : date.format("Do MMMM h:mmA");
-
-    return formattedDate
-      .replace(":00", "")
-      .replace(/(AM|PM)/, (match) => match.toLowerCase());
-  };
-
-  const handileBooking = (id: number, date: moment.Moment) => {
-    console.log(id);
-    setClassesData((prevData) => {
-      return prevData.map((classItem) => {
-        if (classItem.id === id) {
-          return { ...classItem, isBooked: !classItem.isBooked };
-        }
-        return classItem;
-      });
-    });
-
-    toast.message("Booking is confirmed", {
-      description: `${formatClassDate(date)}`,
-    });
-  };
-
+  // console.log(currentItems,handileBooking, bookedOnly, setBookedOnly);
   return (
     <Card className="w-full bg-white lg:rounded-xl">
       <CardHeader>
@@ -137,6 +79,8 @@ function Classes() {
         </div>
       </CardHeader>
       <CardContent>
+
+        {/* checking the window size */}
         {size.width && size.width > 768 ? (
           <Table>
             <TableHeader className="font-inter text-smtext bg-smgray">
@@ -147,7 +91,7 @@ function Classes() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {currentItems.map((data, index) => (
+              {currentItems?.map((data, index) => (
                 <TableRow key={data.id}>
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-3 font-inter">
@@ -327,49 +271,9 @@ function Classes() {
             ))}
           </div>
         )}
-        <Pagination
-          itemsPerPage={itemsPerPage}
-          totalItems={filteredClasses.length}
-          paginate={paginate}
-          currentPage={currentPage}
-        />
       </CardContent>
     </Card>
   );
 }
-
-interface PaginationProps {
-  itemsPerPage: number;
-  totalItems: number;
-  paginate: (pageNumber: number) => void;
-  currentPage: number;
-}
-
-const Pagination: React.FC<PaginationProps> = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
-  const pageNumbers: number[] = [];
-
-  for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  return (
-    <nav>
-      <ul className="flex justify-center space-x-2 mt-4">
-        {pageNumbers.map(number => (
-          <li key={number}>
-            <button
-              onClick={() => paginate(number)}
-              className={`px-3 py-1 rounded ${
-                currentPage === number ? 'bg-primeblue text-white' : 'bg-gray-200'
-              }`}
-            >
-              {number}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
 
 export default Classes;
